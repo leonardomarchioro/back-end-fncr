@@ -18,4 +18,5 @@ model User {
 
   accessToken String? @db.VarChar @map("access_token")
 
+  @@map("user")
 }
