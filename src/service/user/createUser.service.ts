@@ -7,7 +7,11 @@ const createUserService = async ({ email, name, password }: ICreateUser) => {
 
   return await prisma.user.create({
     data: { email, name, password: hashPassword },
-    select: { password: false },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
   });
 };
 

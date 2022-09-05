@@ -16,7 +16,9 @@ const updateUserService = async (
     where: { id: userId },
     data,
     select: {
-      password: false,
+      id: true,
+      email: true,
+      name: true,
     },
   });
 

@@ -4,7 +4,9 @@ const listUserService = async (userId: string) => {
   return await prisma.user.findUnique({
     where: { id: userId },
     select: {
-      password: false,
+      id: true,
+      email: true,
+      name: true,
     },
   });
 };
