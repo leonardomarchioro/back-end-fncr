@@ -15,8 +15,45 @@ model User {
   email String  @unique
   name  String @db.VarChar
   password String @db.VarChar
-
   accessToken String? @db.VarChar @map("access_token")
 
+  category Category[] @relation(name: "UserCategories")
+  transactions Transaction[] @relation(name: "UserTransactions")
+
   @@map("user")
+}
+
+model Category {
+  id String @id @default(uuid()) @db.Uuid
+  name String @db.VarChar
+
+  userId String @db.Uuid @map("user_id")
+  user User @relation(name: "UserCategories", fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  transactions Transaction[] @relation(name: "TransactionsCategory")
+
+  @@map("category")
+}
+
+model Transaction {
+  id String @id @default(uuid()) @db.Uuid
+  title String @db.VarChar
+  description String @db.VarChar
+  date DateTime @db.Date
+  value Decimal @db.Decimal(20,2)
+
+  type typeTransaction
+
+  userId String @db.Uuid @map("user_id")
+  user User @relation(name: "UserTransactions", fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  categoryId String @db.Uuid @map("category_id")
+  category Category @relation(name: "TransactionsCategory", fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("transaction")
+}
+
+enum typeTransaction {
+  entry
+  exit
 }
