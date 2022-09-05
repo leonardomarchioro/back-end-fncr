@@ -16,7 +16,7 @@ app.use(
 app.use(express.json());
 
 app.use("/user", userRouters);
-app.use("/transaction/:type", transactionRouters);
+app.use("/transaction", transactionRouters);
 
 app.set("view engine", "ejs");
 
