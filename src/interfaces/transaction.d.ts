@@ -11,3 +11,10 @@ enum typeTransaction {
   entry = "entry",
   exit = "exit",
 }
+
+export interface IQueryParams {
+  category?: string;
+  type?: typeTransaction;
+  ltDate?: string;
+  gtDate?: string;
+}
